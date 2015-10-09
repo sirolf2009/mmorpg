@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sirolf2009.mmorpg.entity">
+
+	<class name="Character" schema="public" table="characters">
+        <id type="string" name="name" />
+        <property name="class_type"/>
+        <property name="race"/>
+        <property name="level"/>
+	</class>
+
+	<class name="User" schema="public" table="users">
+        <id type="string" name="user_name" />
+        <property name="balance"/>
+        <property name="first_name"/>
+        <property name="last_name"/>
+        <property name="iban"/>
+        <property name="character_slots"/>
+        <property name="last_payment"/>
+        <property name="months_payed"/>
+        <property name="password"/>
+        <property name="banned"/>
+        <set name="characters" table="owns" cascade="all" lazy="false" sort="natural">
+        	<key column="user_name" not-null="true"/>
+        	<many-to-many column="name" class="com.sirolf2009.mmorpg.entity.Character"/>
+        </set>
+	</class>
+
+	<class name="Server" schema="public" table="servers">
+        <id type="string" name="address" />
+        <property name="name"/>
+        <property name="location"/>
+        <property name="max_users"/>
+        <property name="connected_users"/>
+	</class>
+
+</hibernate-mapping>
